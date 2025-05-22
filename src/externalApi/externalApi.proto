@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+
+package external.api.v1;
+
+service rpcService {
+  rpc MessageFromUser(MessageRequest) returns (StatusResponse);
+}
+
+message MessageRequest {
+  string userId = 1;
+  string prompt = 2;
+}
+
+message StatusResponse {
+  string status = 1;
+}

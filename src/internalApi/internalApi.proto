@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package internal.api.v1;
+
+service rpcService {
+  rpc MessageFromUser(MessageRequest) returns (StatusResponse);
+  rpc MessageToUser(MessageRequest) returns (StatusResponse);
+  rpc CreateService(CreateServiceRequest) returns (CreateServiceResponse);
+  rpc StartSession(SessionRequest) returns (StatusResponse);
+  rpc StopSession(SessionRequest) returns (StatusResponse);
+  rpc SendPrompt(SendPromptRequest) returns (PromptResponse);
+}
+
+message MessageRequest {
+  string userId = 1;
+  string text = 2;
+}
+
+message StatusResponse {
+  string status = 1;
+}
+
+message CreateServiceRequest {
+  string name = 1;
+  string short_desc = 2;
+  string long_desc = 3;
+}
+
+message CreateServiceResponse {
+  string serviceId = 1;
+}
+
+message SessionRequest {
+  string serviceId = 1;
+  string userId = 2;
+}
+
+message SendPromptRequest {
+  string serviceId = 1;
+  string userId = 2;
+  string text = 3;
+}
+
+message PromptResponse {
+  string result = 1;
+}

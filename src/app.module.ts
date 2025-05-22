@@ -1,9 +1,13 @@
 import { Module } from '@nestjs/common';
-import { GatewayModule } from './gateway/gateway.module';
+import { InternalApiModule } from './internalApi/internalApi.module';
+import { ExternalApiModule } from './externalApi/externalApi.module';
+import { ConfigModule } from '@nestjs/config';
+import configuration from './config/app.configuration';
 
 @Module({
-  imports: [GatewayModule],
-  controllers: [],
-  providers: [],
+  imports: [
+    ConfigModule.forRoot({ load: [configuration], isGlobal: true, }),
+    InternalApiModule, ExternalApiModule
+  ],
 })
 export class AppModule {}
